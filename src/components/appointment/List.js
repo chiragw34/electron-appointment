@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Card , Grid} from "semantic-ui-react";
+import { Card , Grid ,Input} from "semantic-ui-react";
 const { ipcRenderer } = window.require("electron");
 
 class List extends Component {
   state = {
-    appointments: []
+    appointments: [],
+    filter:''
   };
 
   componentDidMount() {
@@ -23,12 +24,22 @@ class List extends Component {
     return (
       <div>
         <h3>Appointments List</h3>
+        <div style={{ padding: "1% 10% 2% 10%" }}>
+          <Input
+           type="text"
+           name="filter"
+           icon="search"
+           value={this.state.filter}
+           onChange={event => this.setState({filter:event.target.value})} 
+           placeholder="Search..." 
+           style={{width:'100%'}}/>
+        </div>
         <Grid columns={2}>
           {this.state.appointments.map(appointment => {
-            // if (appointment.name.includes(this.state.filter))
+            if (appointment.name.includes(this.state.filter))
             return (
-              <Grid.Column>
-                <Card key={appointment.id} style={{ width: "100%" }}>
+              <Grid.Column key={appointment.id}>
+                <Card style={{ width: "100%" }}>
                   <Card.Content>
                     <Card.Header>{`Name: ${appointment.name}`}</Card.Header>
                     <Card.Meta>{`Appointment Date : ${appointment.date}`}</Card.Meta>
@@ -42,7 +53,7 @@ class List extends Component {
                 </Card>
               </Grid.Column>
             );
-            //else return null;
+            else return null;
           })}
         </Grid>
       </div>

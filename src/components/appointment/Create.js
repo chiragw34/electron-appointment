@@ -5,7 +5,7 @@ const { ipcRenderer } = window.require("electron");
 const INITIAL_STATE = {
   name: "",
   number: "",
-  date: "",
+  date: new Date().toISOString().substring(0,10),
   hour: "",
   symptoms: ""
 };
