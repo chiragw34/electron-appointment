@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{padding:'2%'}}>
         <SideBar onViewChange={view => this.setState({ view })} />
         {this.renderView()}
       </div>

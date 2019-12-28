@@ -12,6 +12,7 @@ class SideBar extends Component {
   render() {
      const { activeItem } = this.state;
     return (
+      <div style={{marginBottom:'2%'}}>
       <Menu pointing vertical>
         <Menu.Item
           name="Today"
@@ -29,6 +30,7 @@ class SideBar extends Component {
           onClick={this.handleItemClick}
         />
       </Menu>
+      </div>
     );
   }
 }

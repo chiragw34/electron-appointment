@@ -21,7 +21,7 @@ class List extends Component {
 
   render() {
     return (
-      <div style={{padding:'2%'}}>
+      <div>
         <h3>Appointments List</h3>
         <Grid columns={2}>
           {this.state.appointments.map(appointment => {
