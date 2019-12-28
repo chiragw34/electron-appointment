@@ -25,6 +25,7 @@ const createWindow = () => {
 
   const startUrl =
     process.env.ELECTRON_START_URL || `file://${__dirname}/build/index.html`;
+    console.log(process.env.ELECTRON_START_URL);
   mainWindow.loadURL(startUrl);
 
   mainWindow.on("closed", () => {
@@ -58,10 +59,12 @@ ipcMain.on("appointment:create", (event, appointment) => {
   appointment["id"] = uuid();
   appointment["done"] = 0;
   allAppointments.push(appointment);
+  console.log('All appointments after inserting : ',allAppointments)
 })
 
 ipcMain.on("appointment:request:list", (event) => {
-  mainWindow.webContents.send("appointment:request:list", allAppointments);
+  console.log('Requesting list :',allAppointments)
+  mainWindow.webContents.send("appointment:response:list", allAppointments);
 })
 
 ipcMain.on("appointment:request:today", event => {
@@ -72,7 +75,6 @@ ipcMain.on("appointment:done", (event, id) => {
   allAppointments.forEach(appointment => {
     if(appointment.id === id) appointment.done = 1
   })
-
   sendTodayAppointments();
 })
 
